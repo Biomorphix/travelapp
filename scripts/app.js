@@ -1,26 +1,34 @@
-var myApp = angular.module('app', ['ui.router']);
+var myApp = angular.module('app', ['ui.router', 'ngTouch']);
 
 myApp.config(function($stateProvider) {
 
     var loginState = {
         name: 'login',
         url: '/',
-        template: '<h3 class="loginPage_title">Amazing app</h3><p class="loginPage_desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aperiam architecto distinctio ipsa odit omnis veniam voluptatem. Asperiores assumenda corporis dolorem exercitationem expedita inventore quidem quisquam rerum! Animi dolor, sed.</p><button class="loginPage_btn" ng-onlick="">Traveller</button><button class="loginPage_btn">Guide</button></button>'
+        template: '<h3 class="loginPage_title">Amazing app</h3><p class="loginPage_desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci aperiam architecto distinctio ipsa odit omnis veniam voluptatem. Asperiores assumenda corporis dolorem exercitationem expedita inventore quidem quisquam rerum! Animi dolor, sed.</p><button class="loginPage_btn" ng-click="authorize(buttons.traveller)">Traveller</button><button ng-click="authorize(buttons.guide)" class="loginPage_btn">Guide</button>',
+        controller: 'appCtrl'
     };
 
-    var helloState = {
-        name: 'hello',
-        url: '/hello',
-        templateUrl: ''
+    var wishState = {
+        name: 'wish',
+        url: '/wish',
+        template: '<img class="bi_photo" ng-swipe-right="skip()" ng-swipe-left="add(data[counter].bi_title)" src={{data[counter].bi_photo}}> ' +
+                    '<h3 class="bi_title" ng-bind=data[counter].bi_title></h3>' +
+                    ' <p class="bi_desc" ng-bind=data[counter].bi_desc>>' +
+                    '</p><div class="bi_statusBar">{{user.bi_count}} / 5</div>',
+        controller: 'wishCtrl'
     };
 
-    var aboutState = {
-        name: 'about',
-        url: '/about',
-        template: '<h3>Its the UI-Router hello world app!</h3>'
+    var guideState = {
+        name: 'guide',
+        url: '/guide',
+        template: '<h3>guide</h3>'
     };
+
 
     $stateProvider.state(loginState);
-    $stateProvider.state(helloState);
-    $stateProvider.state(aboutState);
+    $stateProvider.state(wishState);
+    $stateProvider.state(guideState);
 });
+
+//helvetica
